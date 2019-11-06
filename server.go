@@ -20,21 +20,17 @@ func main() {
 }
 
 func Id(w http.ResponseWriter, r *http.Request) {
-
 	values := r.URL.Query()
 	countVar := values["count"]
 	var count = 1
 	if len(countVar) == 1 {
 		count, _ = strconv.Atoi(countVar[0])
 	}
-
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-
 	ids := []string{}
 	for i := 0; i < count; i++ {
 		ids = append(ids, generator.GetBase64UUID())
 	}
 	json.NewEncoder(w).Encode(ids)
-
 }
